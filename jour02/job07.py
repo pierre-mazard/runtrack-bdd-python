@@ -1,5 +1,48 @@
 import mysql.connector
 
+class Employe:
+    def __init__(self, host, user, password, database):
+        self.cnx = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        self.cursor = self.cnx.cursor()
+
+    def create_employe(self, nom, prenom, salaire, id_service):
+        self.cursor.execute("""
+            INSERT INTO employe (nom, prenom, salaire, id_service)
+            VALUES (%s, %s, %s, %s)
+        """, (nom, prenom, salaire, id_service))
+        self.cnx.commit()
+
+    def read_employe(self, id):
+        self.cursor.execute("""
+            SELECT * FROM employe WHERE id = %s
+        """, (id,))
+        return self.cursor.fetchone()
+
+    def update_employe(self, id, nom, prenom, salaire, id_service):
+        self.cursor.execute("""
+            UPDATE employe
+            SET nom = %s, prenom = %s, salaire = %s, id_service = %s
+            WHERE id = %s
+        """, (nom, prenom, salaire, id_service, id))
+        self.cnx.commit()
+
+    def delete_employe(self, id):
+        self.cursor.execute("""
+            DELETE FROM employe WHERE id = %s
+        """, (id,))
+        self.cnx.commit()
+
+    def close(self):
+        self.cursor.close()
+        self.cnx.close()
+
+
+
 #Création de la connexion à la base de données
 cnx = mysql.connector.connect(
     host='localhost',
