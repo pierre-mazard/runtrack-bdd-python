@@ -66,7 +66,7 @@ def ajouter_cage():
     id = input("Entrez l'id de la cage : ")
     superficie = input("Entrez la superficie de la cage : ")
     capacite_max = input("Entrez la capacité maximale de la cage : ")
-    c.execute("INSERT INTO cage (id, superficie) VALUES (%s, %s)", (id, superficie))
+    c.execute("INSERT INTO cage (id, superficie, capacite_max) VALUES (%s, %s, %s)", (id, superficie, capacite_max))
     mydb.commit()
     print("Cage ajoutée !") 
 
@@ -84,3 +84,40 @@ def modifier_cage():
     mydb.commit()
     print("Cage modifiée !")
 
+while True:
+    print("1. Ajouter un animal")
+    print("2. Supprimer un animal")
+    print("3. Modifier un animal")
+    print("4. Afficher tous les animaux")
+    print("5. Afficher les animaux dans une cage")
+    print("6. Calculer la superficie totale des cages")
+    print("7. Calculer la superficie moyenne des cages")
+    print("8. Ajouter une cage")
+    print("9. Supprimer une cage")
+    print("10. Modifier une cage")
+    print("11. Quitter")
+    choice = input("Choisissez une option : ")
+    if choice == "1":
+        ajouter_animal()
+    elif choice == "2":
+        supprimer_animal()
+    elif choice == "3":
+        modifier_animal()
+    elif choice == "4":
+        montrer_animal()
+    elif choice == "5":
+        montrer_cage()
+    elif choice == "6":
+        superficie_totale_cages()
+    elif choice == "7":
+        superficie_moyenne_cages()
+    elif choice == "8":
+        ajouter_cage()
+    elif choice == "9":
+        supprimer_cage()
+    elif choice == "10":
+        modifier_cage
+    elif choice == "11":    
+        break
+
+mydb.close()
