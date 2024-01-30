@@ -41,6 +41,27 @@ class Employe:
         self.cursor.close()
         self.cnx.close()
 
+# Créer une instance de la classe Employe
+employe = Employe('localhost', 'root', 'root!', 'Job07')
+
+# Créer un nouvel employé
+employe.create_employe('Gimeno', 'Denise', 6580.20, 2)
+
+# Lire les informations d'un employé
+print(employe.read_employe(1))
+
+# Mettre à jour les informations d'un employé
+employe.update_employe(1, 'Gimeno', 'Denise', 46000.00, 1)
+
+# Lire les informations d'un employé
+print(employe.read_employe(1))
+
+# Supprimer un employé
+employe.delete_employe(1)
+
+# Fermer la connexion
+employe.close()
+
 
 
 #Création de la connexion à la base de données
