@@ -68,17 +68,23 @@ def montrer_cage():
     c.execute("SELECT * FROM cage WHERE id = %s", (id_cage,))
     animals = c.fetchall()
     for animal in animals:
+        print("--------------------")
         print(animal)
+        print("--------------------")
 
 def superficie_totale_cages():
     c.execute("SELECT SUM(superficie) FROM cage")
     superficie = c.fetchone()[0]
+    print("--------------------")
     print(f"La superficie totale des cages est de {superficie} m².")
+    print("--------------------")
 
 def superficie_moyenne_cages():
     c.execute("SELECT AVG(superficie) FROM cage")
     superficie = c.fetchone()[0]
+    print("--------------------")
     print(f"La superficie moyenne des cages est de {superficie} m².")
+    print("--------------------")
 
 def ajouter_cage():
     id = input("Entrez l'id de la cage : ")
@@ -86,13 +92,17 @@ def ajouter_cage():
     capacite_max = input("Entrez la capacité maximale de la cage : ")
     c.execute("INSERT INTO cage (id, superficie, capacite_max) VALUES (%s, %s, %s)", (id, superficie, capacite_max))
     mydb.commit()
+    print("--------------------")
     print("Cage ajoutée !") 
+    print("--------------------")
 
 def supprimer_cage():
     id = input("Entrez l'id de la cage à supprimer : ")
     c.execute("DELETE FROM cage WHERE id = %s", (id,))
     mydb.commit()
+    print("--------------------")
     print("Cage supprimée !")  
+    print("--------------------")
 
 def modifier_cage():
     id = input("Entrez l'id de la cage à modifier : ")
@@ -100,8 +110,10 @@ def modifier_cage():
     capacite_max = input("Entrez la nouvelle capacité maximale de la cage : ")
     c.execute("INSERT INTO cage (id, superficie) VALUES (%s, %s)", (id, superficie))
     mydb.commit()
+    print("--------------------")
     print("Cage modifiée !")
-
+    print("--------------------")
+    
 while True:
     print("1. Ajouter un animal")
     print("2. Supprimer un animal")
