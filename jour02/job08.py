@@ -13,6 +13,11 @@ c = mydb.cursor()
 
 def ajouter_animal():
     id = input("Entrez l'id de l'animal : ")
+    c.execute("SELECT * FROM animal WHERE id = %s", (id,))
+    result = c.fetchone()
+    if result : 
+        print("Animal déja existant, veuillez entrer un autre id")
+        return
     nom = input("Entrez le nom de l'animal : ")
     race = input("Entrez la race de l'animal : ")
     id_cage = input("Entrez l'id de la cage de l'animal : ")
@@ -119,5 +124,5 @@ while True:
         modifier_cage
     elif choice == "11":    
         break
-
+c.close
 mydb.close()
