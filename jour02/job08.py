@@ -64,13 +64,24 @@ def montrer_animal():
 
 
 def montrer_cage():
+    print("--------------------")
     id_cage = input("Entrez l'id de la cage : ")
-    c.execute("SELECT * FROM cage WHERE id = %s", (id_cage,))
+    print("--------------------")
+    print("Les animaux dans cette cage sont :")
+    print("--------------------")
+    c.execute("SELECT animal.nom, animal.race FROM animal JOIN cage ON animal.id_cage = cage.id WHERE cage.id = %s", (id_cage,))
+    column_names = [description[0] for description in c.description]
     animals = c.fetchall()
-    for animal in animals:
+    if not animals:
         print("--------------------")
-        print(animal)
+        print("La cage est vide.")
         print("--------------------")
+    else:
+        for animal in animals:
+            for name, attribute in zip(column_names, animal):
+                print(f"{name} : {attribute}")
+            print("--------------------")
+
 
 def superficie_totale_cages():
     c.execute("SELECT SUM(superficie) FROM cage")
