@@ -87,7 +87,15 @@ def superficie_moyenne_cages():
     print("--------------------")
 
 def ajouter_cage():
+    print("--------------------")
     id = input("Entrez l'id de la cage : ")
+    c.execute("SELECT * FROM animal WHERE id = %s", (id,))
+    result = c.fetchone()
+    if result :
+        print("--------------------") 
+        print("Cage déja existante, veuillez entrer un autre id")
+        print("--------------------")
+        return
     superficie = input("Entrez la superficie de la cage : ")
     capacite_max = input("Entrez la capacité maximale de la cage : ")
     c.execute("INSERT INTO cage (id, superficie, capacite_max) VALUES (%s, %s, %s)", (id, superficie, capacite_max))
