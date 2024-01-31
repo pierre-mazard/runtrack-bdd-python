@@ -15,8 +15,10 @@ def ajouter_animal():
     id = input("Entrez l'id de l'animal : ")
     c.execute("SELECT * FROM animal WHERE id = %s", (id,))
     result = c.fetchone()
-    if result : 
+    if result :
+        print("--------------------") 
         print("Animal déja existant, veuillez entrer un autre id")
+        print("--------------------")
         return
     nom = input("Entrez le nom de l'animal : ")
     race = input("Entrez la race de l'animal : ")
@@ -28,10 +30,14 @@ def ajouter_animal():
     print("Animal ajouté !")
 
 def supprimer_animal():
+    print("--------------------")
     id = input("Entrez l'id de l'animal à supprimer : ")
+    print("--------------------")
     c.execute("DELETE FROM animal WHERE id = %s", (id,))
     mydb.commit()
+    print("--------------------")
     print("Animal supprimé !")
+    print("--------------------")
 
 def modifier_animal():
     id = input("Entrez l'id de l'animal à modifier : ")
@@ -48,6 +54,8 @@ def montrer_animal():
     c.execute("SELECT * FROM animal")
     column_names = [description[0] for description in c.description]
     animals = c.fetchall()
+    print("--------------------")
+    print(f"Nombre total d'animaux : {len(animals)}")
     print("--------------------")
     for animal in animals:
         for name, attribute in zip(column_names, animal):
