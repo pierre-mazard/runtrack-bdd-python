@@ -46,9 +46,14 @@ def modifier_animal():
 
 def montrer_animal():
     c.execute("SELECT * FROM animal")
+    column_names = [description[0] for description in c.description]
     animals = c.fetchall()
+    print("--------------------")
     for animal in animals:
-        print(animal)
+        for name, attribute in zip(column_names, animal):
+            print(f"{name} : {attribute}")
+        print("--------------------")
+
 
 def montrer_cage():
     id_cage = input("Entrez l'id de la cage : ")
